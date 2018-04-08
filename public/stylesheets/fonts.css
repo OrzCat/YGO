@@ -1,0 +1,176 @@
+/* -- Font Face -- */
+
+@font-face{
+	font-family:"JDSLSF";
+	src:url(fonts/JDSLSF.woff) format("woff");
+}
+@font-face{
+	font-family:"YGO-MB";
+	src:url(fonts/YGO-MB.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS-B";
+	src:url(fonts/PCM-GS-B.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS-B";
+	font-style:italic;
+	src:url(fonts/PCM-GS-BI.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS-EB";
+	src:url(fonts/PCM-GS-EB.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS-EBC";
+	src:url(fonts/PCM-GS-EBC.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS";
+	font-style:italic;
+	src:url(fonts/PCM-GS-I.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GS";
+	src:url(fonts/PCM-GS.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-GSC-B";
+	src:url(fonts/PCM-GSC-B.woff) format("woff");
+}
+
+/* ==================================================================================== */
+/* ==================================================================================== */
+/* ==================================================================================== */
+
+/* -- Futura -- */
+
+@font-face{
+	font-family:"PCM-FU-EB";
+	src:url(fonts/PCM-FU-EB.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FU-EB";
+	font-style:italic;
+	src:url(fonts/PCM-FU-EBI.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FU-L";
+	src:url(fonts/PCM-FU-L.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FU-L";
+	font-style:italic;
+	src:url(fonts/PCM-FU-LI.woff) format("woff");
+}
+/* ==================================================================================== */
+@font-face{
+	font-family:"PCM-FUB-B";
+	src:url(fonts/PCM-FUB-B.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUB-B";
+	font-style:italic;
+	src:url(fonts/PCM-FUB-BI.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUB";
+	font-style:italic;
+	src:url(fonts/PCM-FUB-I.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUB";
+	src:url(fonts/PCM-FUB.woff) format("woff");
+}
+/* ==================================================================================== */
+@font-face{
+	font-family:"PCM-FUC-B";
+	src:url(fonts/PCM-FUC-B.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC-B";
+	font-style:italic;
+	src:url(fonts/PCM-FUC-BI.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC-EB";
+	src:url(fonts/PCM-FUC-EB.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC-EB";
+	font-style:italic;
+	src:url(fonts/PCM-FUC-EBI.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC";
+	src:url(fonts/PCM-FUC.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC";
+	font-style:italic;
+	src:url(fonts/PCM-FUC-I.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC-L";
+	src:url(fonts/PCM-FUC-L.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUC-L";
+	font-style:italic;
+	src:url(fonts/PCM-FUC-LI.woff) format("woff");
+}
+/* ==================================================================================== */
+@font-face{
+	font-family:"PCM-FUM";
+	src:url(fonts/PCM-FUM.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUM";
+	font-style:italic;
+	src:url(fonts/PCM-FUM-I.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUM-B";
+	src:url(fonts/PCM-FUM-B.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FUM-B";
+	font-style:italic;
+	src:url(fonts/PCM-FUM-BI.woff) format("woff");
+}
+
+/* ==================================================================================== */
+/* ==================================================================================== */
+/* ==================================================================================== */
+
+/* -- Sanvito -- */
+
+@font-face{
+	font-family:"PCM-SV";
+	src:url(fonts/PCM-SV.woff) format("woff");
+}
+
+/* ==================================================================================== */
+/* ==================================================================================== */
+/* ==================================================================================== */
+
+/* -- Frutiger -- */
+
+@font-face{
+	font-family:"PCM-FR";
+	src:url(fonts/PCM-FR.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FR";
+	font-style:italic;
+	src:url(fonts/PCM-FR-I.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FR-B";
+	src:url(fonts/PCM-FR-B.woff) format("woff");
+}
+@font-face{
+	font-family:"PCM-FR-B";
+	font-style:italic;
+	src:url(fonts/PCM-FR-BI.woff) format("woff");
+}

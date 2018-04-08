@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta name="description" content="Yu-Gi-Oh! Card Maker : Create your own custom Yu-Gi-Oh! cards." />
+        <meta name="keywords" content="Yu-Gi-Oh!, Card, Maker, Yu-Gi-Oh! Card Maker, YGO, YCM, yugiohcardmaker, Yu-Gi-Oh! Card Generator">
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		<title>遊戲王卡生產器 - Yu-Gi-Oh! Card Maker</title>
+        <!--[if IE]><script type="text/javascript" src="public/frameworks/excanvas.js"></script><![endif]-->
+        <link rel="stylesheet" href="public/stylesheets/main.css" />
+		<link rel="icon" type="image/png" href="http://www.yugioh-card.com/yugioh.ico" />
+        <script src="js/jquery.min.js"></script>
+        <script src="js/html2canvas.js"></script>
+		<script>
+		#base64 {
+        font-size: 12px;
+        word-break: break-all;
+    }
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43274820-6', 'auto');
+  ga('send', 'pageview');
+		</script>
+		<script>
+		$(document).ready(function(){
+
+		var element = $("#canvascontainer"); // global variable
+		var getCanvas; // global variable
+
+		$("#exportar_imagem").on('click', function () {
+	         html2canvas(element, {
+	         onrendered: function (canvas) {
+	         	 	$("#previewImage").empty();
+	                $("#previewImage").append(canvas);
+	                getCanvas = canvas;
+	             }
+	         });
+	    });
+		$("#salvar_imagem").on('click', function () {
+		    var imgageData = getCanvas.toDataURL("image/png");
+		    // Now browser starts downloading it instead of just showing it
+		    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+		    var card_nome = $(".card_nome").val();
+		    console.log(card_nome);
+		    $("#salvar_imagem").attr("download", card_nome+".png").attr("href", newData);
+		});
+	});
+function getFile(source) {
+        if(window.FileReader) {
+            var oFileReader = new FileReader(),
+                oFile = source.files[0],
+                oBase64 = document.getElementById("base64"),
+                oPreview = document.getElementById("image");
+            // 過濾非圖片檔案
+            if(/^image*/.test(oFile.type)) {
+                oFileReader.onloadend = function(e) {
+                    oBase64.innerHTML = e.target.result;
+                    oPreview.src = e.target.result;
+                };
+                // 圖片轉base64
+                oFileReader.readAsDataURL(oFile);
+            }
+            oBase64.innerHTML = "請選擇圖片!";
+            oPreview.src = "";
+        } else {
+            oBase64.innerHTML = "您當前使用的瀏覽器不支持讀取文件功能";
+        }
+    }
+function toggleShow(sourceBox,toToggle,log,whenChecked,whenNotChecked){
+	//sourceBox = the checkbox to check
+	//toToggle = the element to show or hide
+	//log = what to say when toggling
+	//whenChecked = what to do when checked
+	//whenNotChecked = what to do when not checked
+	if (sourceBox.checked == true){
+		document.getElementById(toToggle).setAttribute("class",whenChecked);
+		console.log(log);
+	}
+	else{
+		document.getElementById(toToggle).setAttribute("class",whenNotChecked);
+		console.log(log);
+	}
+}
+function expandAtk(sourceBox){
+	if (sourceBox.checked == true){
+		document.getElementById("atkcont").style.height = "185px";
+	}
+	else{
+		document.getElementById("atkcont").style.height = "145px";
+	}
+}
+function rotate(rotation){
+	document.getElementById("rotavalue").innerHTML = rotation;
+	document.getElementById("image").style.webkittransform = "rotate("+rotation+"deg)";
+	document.getElementById("image").style.moztransform = "rotate("+rotation+"deg)";
+	document.getElementById("image").style.mstransform = "rotate("+rotation+"deg)";
+	document.getElementById("image").style.otransform = "rotate("+rotation+"deg)";
+	document.getElementById("image").style.transform = "rotate("+rotation+"deg)";
+}
+function imgxmod(val){
+	var img = document.getElementById("image");
+	img.style.paddingLeft = val;
+}
+function imgymod(val){
+	var img = document.getElementById("image");
+	img.style.paddingTop = val;
+}
+function imgmod(attrib,val){
+	var img = document.getElementById("image");
+	img.setAttribute(attrib,val);
+}
+
+function imgChange(imgURL){ 
+	var mainC=document.getElementById("cardtype"); 
+	var ctx=mainC.getContext("2d"); 
+	mainC.width = mainC.width;
+	var img = new Image(); 
+	img.src = "public/media/yugioh/"+imgURL; 
+	img.onload = function(){ 
+		ctx.drawImage(img,0,0); 
+	}
+	
+	if (document.getElementById("d1").checked == true || document.getElementById("d2").checked == true || document.getElementById("d3").checked == true){
+		fixDark("darkblank");
+	}
+	else{
+		fixDark("lightblank");
+	}
+}
+
+function fixDark(classSet){
+	document.getElementById("canvascontainer").setAttribute("class",classSet);
+}
+
+var typeIndex = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; //sometimes I disgust myself
+var cycleCount = 1;
+
+function cycleType(icon,iId){
+	var type = ["Continuous",
+	"Counter",
+	"Equip",
+	"Field",
+	"Normal",
+	"Quick",
+	"Ritual",
+	"none"
+	];
+	
+	if (typeIndex[iId] < 6){
+		typeIndex[iId]++;
+		if(iId === 1 || iId === 4 || iId === 8){
+			if(type[typeIndex[iId]] === "none"){
+				type[typeIndex[iId]] = "free"
+			}
+		}
+	}else{
+		typeIndex[iId] = 0;
+	}
+	
+	icon.src = "public/media/trap/"+type[typeIndex[iId]]+".png";
+}
+function cycleHolo(icon,iId){
+	var type = ["h1",
+	"h2",
+	"h3",
+	"h4",
+	"h5"
+	];
+	
+	if (typeIndex[iId] < 3){
+		typeIndex[iId]++;
+		if(iId === 1 || iId === 3 || iId === 5){
+			if(type[typeIndex[iId]] === "none"){
+				type[typeIndex[iId]] = "free"
+			}
+		}
+	}else{
+		typeIndex[iId] = 0;
+	}
+	
+	icon.src = "public/media/holo/"+type[typeIndex[iId]]+".png";
+}
+function cycleRetreat(retreat){
+	var retImg = document.createElement("IMG");
+	retImg.src = "public/media/icons/colourless.png";
+	
+	if (cycleCount < 4){
+		retreat.appendChild(retImg); 
+		cycleCount++;
+		console.log(cycleCount);
+	}else{
+		retreat.innerHTML = "";
+		cycleCount = 0;
+	}
+}
+function energyAlignment(atkal){
+	document.getElementById("atkcont").setAttribute("class",atkal);
+}
+		</script>
+	</head>
+	<body>
+        <noscript>
+        	<div class="quote">
+            	<h1>Javascript must be enabled</h1>
+                <p>Sorry, but it appears that javascript on your browser isn't enabled. your browser needs to have javascript enabled to be able to run the card maker. </p>
+            </div>
+        </noscript>
+		<div class="quote">
+			<div id="canvascontainer">
+				<div id="imagecont">
+					<img id="image"/>
+				</div>
+				<canvas id="cardtype" height="612" width="420">Your browser does not support the HTML5 canvas</canvas>
+				<div id="namebox">
+					<span id="name" contenteditable="true" spellcheck="false">死亡之握</span>
+				</div>
+				<div id="healthbox">
+                    <div id="atk1" class="atk">
+							<span class="atktrap"><img onClick="javascript:cycleType(this,1)" title="點擊更換效果標記" src="public/media/trap/Quick.png"></span>
+                                </div>
+					<div id="atkho">
+								<span class="atkholo"><img onClick="javascript:cycleHolo(this,1)" title="點擊更換雷射標籤" src="public/media/holo/h1.png"></span>
+							</div>
+				</div>
+				<div id="specs" contenteditable="true" spellcheck="false">95515060</div>
+				<img id="footline" src="public/media/specsline.png" class="show"/>
+				<div id="footer" contenteditable="true" spellcheck="false">死亡之握</div>
+				<div id="illus" contenteditable="true" spellcheck="false">LCYW-EN025</div>
+				<div id="filler"></div>
+			</div>
+        	<div id="infocontainer">
+        		<b>Card type:</b>
+        		<table id="types">
+					<tr>
+						<td><b>魔法卡:</b></td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('spellcard/s.png');"/>普卡</td>
+						<td><input type="radio" checked="true" name="blank" onChange="javascript:imgChange('spellcard/si.png');"/>普+標</td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('spellcard/sc.png');"/>金卡</td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('spellcard/sic.png');"/>金+標</td>
+					</tr>
+					<tr>
+						<td><b>陷阱卡:</b></td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('trapcard/t.png');"/>普卡</td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('trapcard/ti.png');" id="d2"/>普+標</td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('trapcard/tc.png');"/>金卡</td>
+						<td><input type="radio" name="blank" onChange="javascript:imgChange('trapcard/tic.png');"/>金+標</td>
+					</tr>
+				</table>
+        		<hr/>
+        		<b>Show/hide card elements:</b><br/>
+                <input type="checkbox" onchange="javascript:toggleShow(this,'atk1','Toggling attack 1','hide','show');"/>關閉效果標記
+        		<input type="checkbox" onchange="javascript:toggleShow(this,'atkho','Toggling attack 1','hide','show');"/>關閉雷射標籤<br/>
+        		<hr/>
+        		<b>Image properties:</b>
+        		<div class="spacer"><input id="base64" type="file" onchange="getFile(this)" /></div>
+        		<div class="spacer">
+        			<table>
+						<tr>
+							<td><b>Starting X: </b></td>
+							<td><input type="range" name="rotation" onchange="javascript:imgxmod(this.value+'px');" min="0" max="1000" value="0" style="vertical-align:middle;" id="rotin" step="10"/></td>
+						</tr>
+						<tr>
+							<td><b>Starting Y: </b></td>
+							<td><input type="range" name="rotation" onchange="javascript:imgymod(this.value+'px');" min="0" max="1000" value="0" style="vertical-align:middle;" id="rotin" step="10"/></td>
+						</tr>
+						<tr>
+							<td><b>Height: </b></td>
+							<td><input type="range" name="rotation" onchange="javascript:imgmod('height',this.value+'px');" min="0" max="1000" value="0" style="vertical-align:middle;" id="rotin" step="10"/></td>
+						</tr>
+						<!--<tr>
+							<td><b>Width: </b></td>
+							<td><input type="range" name="rotation" onchange="javascript:imgmod('width',this.value+'px');" min="0" max="1000" value="500" style="vertical-align:middle;" id="rotin" step="10"/></td>
+						</tr>-->
+        			</table>
+        		</div>
+        		<div class="spacer"><b>Rotation:</b> 0°<input type="range" name="rotation" onchange="javascript:rotate(this.value);" min="0" max="360" value="0" style="vertical-align:middle;" id="rotin" step="10"/>360° <b>Current value: </b><span id="rotavalue">0</span>°</div>
+                <input type="button" id="exportar_imagem" value="製作卡片" class="button_salvar">
+                <a href="#" id="salvar_imagem" class="link_salvar_imagem">製作完畢點擊下載</a>
+        	</div>
+            <div id="previewImage"></div>
+        </div>
+		<div align="center" class="legal">
+			<hr/>
+			<span class="copyleft" title="Copyleft">©</span> 2017 Yu-Gi-Oh! Card Maker by OrzCat. Yu-Gi-Oh! Card Maker is not affiliated with Konami Digital Entertainment, or any of its affiliates.<br/>
+		</div>
+	</body>
+</html>
